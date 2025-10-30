@@ -6,7 +6,7 @@ CXXFLAGS = -Wall -std=c++17
 TARGET = shell
 
 # files to compile
-SRCS = main.cpp parser.cpp
+SRCS = main.cpp parser.cpp executor.cpp
 
  # object files
 OBJS = $(SRCS:.cpp=.o)
