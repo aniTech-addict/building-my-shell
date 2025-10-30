@@ -16,11 +16,17 @@ This project is part of a learning journey — understanding the internals of sh
   - `pwd`  —  Print current working directory  
   - `help` — Show basic usage info  
   - `exit` — Quit the shell  
+  - `clear` — Clear the screen
+  - `echo` -- Print a string
+  - `ls` -- List files in current directory
+  - `cat` -- Print the contents of a file
+
+  ----etc-----
 
  Executes in a clean loop until manually exited  
 
 # @ Upcoming (Planned):
-- External command execution (`ls`, `cat`, etc.)  
+
 - Input/output redirection (`>`, `<`)  
 - Piping (`|`)  
 - Background processes (`&`)  
