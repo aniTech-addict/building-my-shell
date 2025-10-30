@@ -6,6 +6,9 @@
 #include <sys/wait.h>    // wait()
 #include <sys/types.h>    // pid_t
 
+// user defined header files
+#include "parser.h" 
+
 using namespace std;
 
 int main(){
@@ -22,12 +25,7 @@ int main(){
 
 
         // parsing input into tokens
-        vector<string> tokens;
-        stringstream ss(input); // creates a fake stream from a string
-        string token;
-        while (ss >> token) { //iteration divided by SPACES , word by word until reaches nullptr;
-            tokens.push_back(token);
-        }
+        std::vector<std::string> args = parseInput(input);
 
         vector<char*> args;
         for(auto& token : tokens){ // execvp expects char* thus conversion from string to char* [l][s][][-][l][null]
@@ -46,12 +44,12 @@ int main(){
         if(pid == 0){ // 0 represents child  process while parent would have a +ve process id
             execvp(args[0],args.data()); // if err , execvp would return -1 else nothing and we would just jump 
             cerr << "Command not found: " << args[0] << endl;
-            exit(1); 
+            exit(1);  // exe only when fails in execvp
+        } 
+        else{
+            int status;
+            waitpid(pid, &status, 0); // awaits the end of the child process and status holds the exit code of child
         }
-
-        int status;
-        waitpid(pid, &status, 0); // awaits the end of the child process and status holds the exit code of child
-
 
     }
 
