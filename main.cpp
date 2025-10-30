@@ -25,6 +25,7 @@ int main(){
         auto tokens = parseInput(input);
 
         executeCommand(tokens);
+
     }
 
     return 0;
