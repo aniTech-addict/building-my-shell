@@ -5,7 +5,7 @@
 #include <string>
 #include <vector>
 
-// Function that splits the input string into tokens (words)
-std::vector<std::string> parseInput(const std::string &input);
+// split string into word tokens
+std::vector<std::string> parseInput(const std::string &input); 
 
 #endif

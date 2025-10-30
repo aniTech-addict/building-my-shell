@@ -25,13 +25,15 @@ int main(){
 
 
         // parsing input into tokens
-        std::vector<std::string> args = parseInput(input);
+        auto tokens = parseInput(input);
+        if (tokens.empty()) continue;
 
+        // Convert vector<string> → vector<char*> for execvp()
         vector<char*> args;
-        for(auto& token : tokens){ // execvp expects char* thus conversion from string to char* [l][s][][-][l][null]
-            args.push_back(&token[0]);
+        for (auto& token : tokens) {
+            args.push_back(&token[0]);  // C-string version of each token
         }
-        args.push_back(nullptr); // acts as ending marker
+        args.push_back(nullptr);  // acts as ending marker
 
         //child process
         pid_t pid = fork(); // create a duplicate instance of the parent(shell) same memory/variables etc
