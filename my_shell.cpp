@@ -23,34 +23,34 @@ int main(){
 
         // parsing input into tokens
         vector<string> tokens;
-        stringstream ss(input);
+        stringstream ss(input); // creates a fake stream from a string
         string token;
-        while (ss >> token) {
+        while (ss >> token) { //iteration divided by SPACES , word by word until reaches nullptr;
             tokens.push_back(token);
         }
 
         vector<char*> args;
-        for(auto& token : tokens){
+        for(auto& token : tokens){ // execvp expects char* thus conversion from string to char* [l][s][][-][l][null]
             args.push_back(&token[0]);
         }
-        args.push_back(nullptr);
+        args.push_back(nullptr); // acts as ending marker
 
         //child process
-        pid_t pid = fork();
+        pid_t pid = fork(); // create a duplicate instance of the parent(shell) same memory/variables etc
 
-        if(pid < 0){
+        if(pid < 0){ // -1 when creation of child process fails, thus process id returned is -1
             perror("fork");
             exit(1);
         }
 
-        if(pid == 0){
+        if(pid == 0){ // 0 represents child  process while parent would have a +ve process id
             execvp(args[0],args.data()); // if err , execvp would return -1 else nothing and we would just jump 
             cerr << "Command not found: " << args[0] << endl;
             exit(1); 
         }
 
         int status;
-        waitpid(pid, &status, 0);
+        waitpid(pid, &status, 0); // awaits the end of the child process and status holds the exit code of child
 
 
     }
